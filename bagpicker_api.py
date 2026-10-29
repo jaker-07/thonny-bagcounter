@@ -1,15 +1,15 @@
-# JAKE RR THONNY PYTHON PROJECT CLAUDE VERSION
+# THONNY PYTHON PROJECT CLAUDE VERSION
+# YOU NEED TO ADD API KEY WHERE SHOWN IN CODE
 # install 'antrhopic' in Thonny
 
-import tkinter                           # AI-sourced (Claude): tkinter is used for the file picker below
+import tkinter                          
 from tkinter import filedialog
-import os                                # AI-sourced (Claude): os and sys are used to open the output file at the end
+import os                               
 import sys
-import base64                            # AI-sourced (Claude): turns PDFs/images into text so they can be sent
-import anthropic                         # AI-sourced (Claude): used to send the file to Claude
+import base64                           
+import anthropic                       
 
 
-# AI-sourced (Claude): sends the file to Claude and asks it to count the pink and green bags
 def count_bags(filename):
     bag_file = open(filename, "rb")      # "rb" reads the raw bytes, so it works for any file type
     file_bytes = bag_file.read()
@@ -23,7 +23,7 @@ def count_bags(filename):
     else:                                # anything else is sent as plain text
         file_block = {"type": "text", "text": file_bytes.decode("utf-8", errors="ignore")}
 
-    client = anthropic.Anthropic(api_key=" ")       # anthropic.Anthropic(api_key="sk-ant-...") if Thonny can't find your key
+    client = anthropic.Anthropic(api_key=" ")       # <----- anthropic.Anthropic(api_key="sk-ant-...") 
     response = client.messages.create(
         model="claude-opus-5-5",
         max_tokens=16000,
@@ -57,7 +57,6 @@ output_file = open("bag_count_output.txt", "w")   # "w" creates a new file to wr
 output_file.write(f"There are {pink} students who have pink bags and {green} students who have green bags.")
 output_file.close()                               # closing saves the file
 
-# AI-sourced (Claude): opens the output file automatically in the computer's default text app
 if sys.platform == "win32":              # Windows
     os.startfile("bag_count_output.txt")
 else:                                    # macOS
